@@ -16,12 +16,11 @@ public class Main
         List<Message> messages = new ArrayList<>();
         messages.add(message);
 
-        OpenAiService service = new OpenAiService("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");
+        OpenAiService service = new OpenAiService("");
         ChatCompletionRequest chatRequest = ChatCompletionRequest.builder()
                 .messages(messages)
                 .model("gpt-3.5-turbo")
                 .build();
-
         ChatCompletionResponse chatCompletionResponse = service.createChatCompletionRequest(chatRequest);
         System.out.println(chatCompletionResponse.getChoices().get(0).getMessage().getContent());
     }
