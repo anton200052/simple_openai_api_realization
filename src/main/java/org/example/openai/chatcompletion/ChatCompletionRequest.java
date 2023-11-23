@@ -1,6 +1,7 @@
-package org.example.openai;
+package org.example.openai.chatcompletion;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.example.openai.apiobjects.Message;
 
 import java.util.List;
 

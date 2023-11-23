@@ -1,6 +1,7 @@
-package org.example.openai.chatcompletion;
+package org.example.openai.apiobjects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.example.openai.apiobjects.Message;
 
 public class Choice
 {

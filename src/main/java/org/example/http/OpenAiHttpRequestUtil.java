@@ -15,14 +15,19 @@ import java.io.InputStreamReader;
 
 public class OpenAiHttpRequestUtil
 {
-    public static JsonNode createPostRequest(String jsonBody, String apiUrl, String apiKey)
+    public static JsonNode createPostRequest(String jsonBody, String apiUrl, String apiKey, boolean assistant) // <- NOTE: Remake this to enum
     {
-        try(CloseableHttpClient client = HttpClients.createDefault())
+        try (CloseableHttpClient client = HttpClients.createDefault())
         {
             HttpPost httpPost = new HttpPost(apiUrl);
 
             httpPost.setHeader("Content-Type", "application/json");
             httpPost.setHeader("Authorization", "Bearer " + apiKey);
+
+            if (assistant)
+            {
+                httpPost.setHeader("OpenAI-Beta", "assistants=v1");
+            }
 
             httpPost.setEntity(new StringEntity(jsonBody));
 
@@ -38,16 +43,12 @@ public class OpenAiHttpRequestUtil
                 content.append(line).append("\n ");
             }
 
-            if (response.getStatusLine().getStatusCode() == 200)
-            {
-                return JsonUtil.parse(content.toString());
-            }
+            return JsonUtil.parse(content.toString());
 
-            throw new IOException();
         }
         catch (IOException e)
         {
-            System.out.println("Error");;
+            System.out.println("Error");
             return null;
         }
     }
