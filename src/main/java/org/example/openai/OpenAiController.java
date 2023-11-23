@@ -3,6 +3,8 @@ package org.example.openai;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.example.http.OpenAiHttpRequestUtil;
 import org.example.json.JsonUtil;
+import org.example.openai.chatcompletion.ChatCompletionRequest;
+import org.example.openai.chatcompletion.ChatCompletionResponse;
 
 public class OpenAiService
 {
