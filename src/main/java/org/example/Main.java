@@ -13,7 +13,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-        OpenAiController controller = new OpenAiController("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");
+        OpenAiController controller = new OpenAiController("");
 
         /*Message message = new Message("user", "Hello!");
         List<Message> messages = new ArrayList<>();
