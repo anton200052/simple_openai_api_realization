@@ -2,20 +2,18 @@ package org.example;
 
 
 import org.example.openai.OpenAiController;
-import org.example.openai.apiobjects.Message;
-import org.example.openai.apiobjects.Tool;
-import org.example.openai.assistanst.AssistantsCreator;
-import org.example.openai.chatcompletion.ChatCompletionRequest;
-import org.example.openai.chatcompletion.ChatCompletionResponse;
+import org.example.openai.assistanst.Assistant;
+import org.example.openai.assistanst.AssistantsManager;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main
 {
     public static void main(String[] args)
     {
-        OpenAiController controller = new OpenAiController("");
+        OpenAiController controller = new OpenAiController("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");
 
         /*Message message = new Message("user", "Hello!");
         List<Message> messages = new ArrayList<>();
@@ -28,13 +26,35 @@ public class Main
         ChatCompletionResponse chatCompletionResponse = service.createChatCompletionRequest(chatRequest);
         System.out.println(chatCompletionResponse.getChoices().get(0).getMessage().getContent());*/
 
-        AssistantsCreator assistant = new AssistantsCreator.AssistantsCreatorBuilder()
+        AssistantsManager manager = AssistantsManager.builder()
                 .instructions("You are a personal math tutor. Write and run code to answer math questions.")
                 .name("Math Tutor")
-                .tools(List.of(new Tool("code_interpreter")))
                 .model("gpt-4")
                 .build();
-        controller.createAssistant(assistant);
 
+        Assistant assistant = controller.createAssistant(manager);
+        System.out.println(assistant);
+
+        try(BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in)))
+        {
+            String str;
+
+            while (!(str = bufferedReader.readLine()).equals("next"))
+            {
+
+            }
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+
+        AssistantsManager manager2 = AssistantsManager.builder()
+                .instructions("1")
+                .name("New Name")
+                .build();
+
+        Assistant assistant2 = controller.modifyAssistant(assistant.getId(), manager2);
+        System.out.println(assistant2);
     }
 }

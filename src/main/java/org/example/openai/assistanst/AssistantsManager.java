@@ -1,11 +1,14 @@
 package org.example.openai.assistanst;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.example.openai.apiobjects.Tool;
 
 import java.util.List;
+import java.util.Map;
 
-public class AssistantsCreator
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class AssistantsManager
 {
     @JsonProperty("instructions")
     private String instructions;
@@ -15,8 +18,14 @@ public class AssistantsCreator
     private List<Tool> tools;
     @JsonProperty("model")
     private String model;
+    @JsonProperty("description")
+    private String description;
+    @JsonProperty("file_ids")
+    private List<String> fileIds;
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
-    public AssistantsCreator(String instructions, String name, List<Tool> tools, String model)
+    public AssistantsManager(String instructions, String name, List<Tool> tools, String model)
     {
         this.instructions = instructions;
         this.name = name;
@@ -24,13 +33,38 @@ public class AssistantsCreator
         this.model = model;
     }
 
-    public AssistantsCreator()
+    public AssistantsManager()
     {
+    }
+
+    public static AssistantsManagerBuilder builder()
+    {
+        return new AssistantsManagerBuilder();
     }
 
     public String getInstructions()
     {
         return instructions;
+    }
+
+    public List<String> getFileIds()
+    {
+        return fileIds;
+    }
+
+    public void setFileIds(List<String> fileIds)
+    {
+        this.fileIds = fileIds;
+    }
+
+    public Map<String, String> getMetadata()
+    {
+        return metadata;
+    }
+
+    public void setMetadata(Map<String, String> metadata)
+    {
+        this.metadata = metadata;
     }
 
     public void setInstructions(String instructions)
@@ -63,46 +97,55 @@ public class AssistantsCreator
         return model;
     }
 
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
     public void setModel(String model)
     {
         this.model = model;
     }
 
-    // Внутренний статический класс Builder
-    public static class AssistantsCreatorBuilder
+    public static class AssistantsManagerBuilder
     {
         private String instructions;
         private String name;
         private List<Tool> tools;
         private String model;
 
-        public AssistantsCreatorBuilder instructions(String instructions)
+        public AssistantsManagerBuilder instructions(String instructions)
         {
             this.instructions = instructions;
             return this;
         }
 
-        public AssistantsCreatorBuilder name(String name)
+        public AssistantsManagerBuilder name(String name)
         {
             this.name = name;
             return this;
         }
 
-        public AssistantsCreatorBuilder tools(List<Tool> tools)
+        public AssistantsManagerBuilder tools(List<Tool> tools)
         {
             this.tools = tools;
             return this;
         }
 
-        public AssistantsCreatorBuilder model(String model)
+        public AssistantsManagerBuilder model(String model)
         {
             this.model = model;
             return this;
         }
 
-        public AssistantsCreator build()
+        public AssistantsManager build()
         {
-            return new AssistantsCreator(instructions, name, tools, model);
+            return new AssistantsManager(instructions, name, tools, model);
         }
     }
 }
