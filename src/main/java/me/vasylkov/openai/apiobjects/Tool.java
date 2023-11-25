@@ -1,4 +1,4 @@
-package org.example.openai.apiobjects;
+package me.vasylkov.openai.apiobjects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

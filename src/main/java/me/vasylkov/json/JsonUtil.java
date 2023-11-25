@@ -1,6 +1,7 @@
-package org.example.json;
+package me.vasylkov.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
 
 import java.io.IOException;
@@ -21,12 +22,17 @@ public class JsonUtil
         return objectMapper.readTree(string);
     }
 
-    public static <T> T fromJson(JsonNode node, Class<T> clazz) throws JsonProcessingException
+    public static <T> T fromJsonToObject(JsonNode node, Class<T> clazz) throws JsonProcessingException
     {
         return objectMapper.treeToValue(node, clazz);
     }
 
-    public static JsonNode toJson(Object o)
+    public static <T> T fromJsonToGenericObject(JsonNode node, TypeReference<T> typeReference) throws IOException
+    {
+        return objectMapper.readValue(stringify(node), typeReference);
+    }
+
+    public static JsonNode toJsonFromObject(Object o)
     {
         return objectMapper.valueToTree(o);
     }

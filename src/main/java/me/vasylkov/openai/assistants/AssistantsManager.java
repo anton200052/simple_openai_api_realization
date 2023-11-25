@@ -1,8 +1,8 @@
-package org.example.openai.assistanst;
+package me.vasylkov.openai.assistants;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.example.openai.apiobjects.Tool;
+import me.vasylkov.openai.apiobjects.Tool;
 
 import java.util.List;
 import java.util.Map;

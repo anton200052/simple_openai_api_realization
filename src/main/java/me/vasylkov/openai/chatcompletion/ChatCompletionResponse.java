@@ -1,9 +1,9 @@
-package org.example.openai.chatcompletion;
+package me.vasylkov.openai.chatcompletion;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.example.openai.apiobjects.Choice;
-import org.example.openai.apiobjects.Usage;
+import me.vasylkov.openai.apiobjects.Choice;
+import me.vasylkov.openai.apiobjects.Usage;
 
 import java.util.List;
 
